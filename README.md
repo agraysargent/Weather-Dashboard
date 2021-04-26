@@ -1,6 +1,6 @@
 # Weather-Dashboard
 
-This assignment required us to create a weather dashboard, which would allow folx to view the upcoming weather schedule for the next five days. The weather dashboard will utilize html and css in conjunction with jquery, bootstrap, in addition to javascript.
+This assignment required us to create a weather dashboard, which would allow folx to view the upcoming weather schedule for the next five days. The weather dashboard will utilize HTML and CSS in conjunction with jquery, bootstrap, in addition to javascript.
 
 # User Story
 
@@ -10,7 +10,7 @@ SO THAT I can plan a trip accordingly
 
 # Description
 
-Weather dashboards allow and assist folx in planning their weeks accordingly. No one wants to step outside with no umbrella and be caught in the rain! By having an updated weather dashboard to visit various cities of your choosing, it will help people be better prepared for the impending weather forecast.
+Weather dashboards allow and assist folx in planning their weeks accordingly. No one wants to step outside with no umbrella and be caught in the rain! Having an updated weather dashboard to visit various cities of your choosing will help people be better prepared for the impending weather forecast.
 
 # Considerations
 
