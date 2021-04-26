@@ -1,0 +1,8 @@
+/* googled w3 schools and stack overflow on how to best hide custom css issues, so it wouldn't interfere with bootstrap */
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
