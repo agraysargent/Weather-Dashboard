@@ -14,6 +14,8 @@ Weather dashboards allow and assist folx in planning their weeks accordingly. No
 
 # Considerations
 
+Some issues I ran into were typos due to the number of times I needed to reiterate the const and card classes. In addition to ensuring that local storage was functioning appropriately as you coded.
+
 # Acceptance Criteria
 
 GIVEN a weather dashboard with form inputs
@@ -34,4 +36,8 @@ Angelica Sargent
 
 # Screenshot
 
+![Screenshot](./assets/images/screenshot1.png)
+
 # Link
+
+Take a look at this [link](https://agraysargent.github.io/Weather-Dashboard/)!

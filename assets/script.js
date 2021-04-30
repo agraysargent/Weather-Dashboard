@@ -3,6 +3,7 @@ const apiKey = "&appid=afaa8eea1769b4359fd8e07b2efcefbd";
 let date = new Date();
 const cities = [""]; 
 
+// worked with tutor on json stringify and parse
 localStorage.setItem("cities", JSON.stringify(cities))
 
 // function & event enabled for user to search terms, also prevent default enabled to prevent page refresh
