@@ -16,11 +16,12 @@ $("#searchTerm").keypress(function (event) {
 // search button on click will search the terms and pull from api accordingly
 $("#searchBtn").on("click", function () {
   $("#forecastH5").addClass("show");
+  $("#forecast").empty();
   city = $("#searchTerm").val();
- let cityHistory = JSON.parse(localStorage.getItem("cities"));
- let cityHistory2 = localStorage.getItem("cities");
- cityHistory.push(city)
- console.log(cityHistory2, 'this is a string')
+let cityHistory = JSON.parse(localStorage.getItem("cities"));
+cityHistory.push(city)
+console.log(cityHistory, 'this has the new search term')
+localStorage.setItem("cities", JSON.stringify(cityHistory));
   //localStorage.setItem(city, city);
   // website pulling the api data
   const queryURL =
@@ -35,29 +36,29 @@ $("#searchBtn").on("click", function () {
     let tempF = (response.list[0].main.temp - 273.15) * 1.8 + 32;
     console.log(Math.floor(tempF));
 
-    // getCurrentConditions(response);
+    getCurrentConditions(response);
     getCurrentForecast(response);
-    // makeList();
+    makeList(city);
   });
 });
 
 // console log displaying errors for line 2 in script
 
-function makeList() {
+function makeList(city) {
   let listItem = $("<li>").addClass("list-group-item").text(city);
   $(".list").append(listItem);
 }
 
 // googled math.floor via stackoverflow for assistance on development below (again)
 function getCurrentConditions(response) {
-  let tempF = (response.main.temp - 273.15) * 1.8 + 32;
+  let tempF = (response.list[0].main.temp - 273.15) * 1.8 + 32;
   tempF = Math.floor(tempF);
-
+  console.log(response.list[0].weather[0].icon)
   $("#currentCity").empty();
 
   const card = $("<div>").addClass("card");
   const cardBody = $("<div>").addClass("card-body");
-  const city = $("<h4>").addClass("card-title").text(response.name);
+  const city = $("<h4>").addClass("card-title").text(response.list[0].main.name);
   const cityDate = $("<h4>")
     .addClass("card-title")
     .text(date.toLocaleDateString("en-US"));
@@ -66,13 +67,13 @@ function getCurrentConditions(response) {
     .text("Temperature: " + tempF + "  °F");
   const humidity = $("<p>")
     .addClass("card-text current-humidty")
-    .text("Humidty: " + response.main.humdity + "%");
+    .text("Humidity: " + response.list[0].main.humidity + "%");
   const wind = $("<p>")
     .addClass("card-text current-wind")
-    .text("Wind Speed: " + response.wind.speed + "MPH");
+    .text("Wind Speed: " + response.list[0].wind.speed + "MPH");
   const image = $("<img>").attr(
     "src",
-    "https://openweathermap.org/img/w" + response.weather[0].icon + ".png"
+    "http://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + "@2x.png"
   );
 
   city.append(cityDate, image);
@@ -82,16 +83,6 @@ function getCurrentConditions(response) {
 }
 
 function getCurrentForecast(results) {
-  // $.ajax({
-  //     url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + apiKey,
-  //     method: "GET"
-  // }).then(function(response){
-  //     console.log(response)
-  //     console.log(response.dt)
-  //     $('#forecast').empty();
-
-  //     let results = response.list;
-  //     console.log(results)
   console.log("hello");
   for (let i = 0; i < results.list.length; i++) {
     let day = Number(results.list[i].dt_txt.split("-")[2].split("")[0]);
@@ -107,9 +98,7 @@ function getCurrentForecast(results) {
       let temp = (results.list[i].main.temp - 273.15) * 1.8 + 32;
       let tempF = Math.floor(temp);
       // console.log(tempF)
-
           const card = $("<div>").addClass("card col-md ml-4 bg-primary text-white");
-          console.log(card)
           const cardBody = $("<div>").addClass("card-body p-3 forecastBody");
           const cityDate = $("<h4>").addClass("card-title").text(date.toLocaleDateString('en-US'));
           const temperature = $("<p>").addClass("card-text forecastTemp").text("Temperature: " + tempF +  " °F");
@@ -117,9 +106,7 @@ function getCurrentForecast(results) {
           const image = $("<img>").attr("src", "https://openweathermap.org/img/w/" + results.list[i].weather[0].icon + ".png")
 
           cardBody.append(cityDate, image, temperature, humidity);
-        console.log(card)
           card.append(cardBody);
-          console.log(card)
           $("#forecast").append(card);
     }
   }
